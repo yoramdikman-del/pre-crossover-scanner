@@ -2,6 +2,7 @@ name: Pre-Crossover Scanner
 
 on:
   schedule:
+    # כל יום ב-07:00 ישראל (04:00 UTC) ימי מסחר
     - cron: '0 4 * * 1-5'
   workflow_dispatch:
 
