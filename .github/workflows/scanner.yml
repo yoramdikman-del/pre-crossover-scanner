@@ -2,7 +2,6 @@ name: Pre-Crossover Scanner
 
 on:
   schedule:
-    # כל יום ב-07:00 ישראל (04:00 UTC) ימי מסחר
     - cron: '0 4 * * 1-5'
   workflow_dispatch:
 
@@ -15,21 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: pip install yfinance pandas numpy google-auth google-auth-httplib2
-
       - name: Generate GitHub OIDC Token
         run: |
           TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=//iam.googleapis.com/projects/578810778006/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions" \
             | python3 -c "import sys,json; print(json.load(sys.stdin)['value'])")
           echo "$TOKEN" > /tmp/github_token
-
       - name: Run scanner
         env:
           GMAIL_USER:         ${{ secrets.GMAIL_USER }}
