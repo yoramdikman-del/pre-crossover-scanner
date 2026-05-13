@@ -2,7 +2,7 @@ name: Pre-Crossover Scanner
 
 on:
   schedule:
-    - cron: '0 4 * * 1-5'
+    - cron: '0 3 * * 1-5'
   workflow_dispatch:
 
 permissions:
