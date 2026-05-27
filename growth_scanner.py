@@ -1,4 +1,4 @@
-name: Momentum Scanner
+name: MACD Momentum Scanner
 
 on:
   schedule:
